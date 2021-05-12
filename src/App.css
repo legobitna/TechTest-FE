@@ -1,33 +1,39 @@
-.App {
-  text-align: center;
+.add_lead_modal_btn{
+  background-color: black !important; 
+  border-color: black !important;
+  margin-bottom: 1em;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.leads_table {
+  
+  background-color: black;
+  color:white;
+  border-color: gray;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.update_lead_modal_btn{
+  background-color: black !important; 
+  border-color: black !important;
+  margin-right: 1em;
+}
+.delete_lead_modal_btn{
+  background-color: black !important; 
+  border-color: black !important;
+}
+.add_lead_btn{
+  background-color: black !important; 
+  border-color: black !important;
+}
+.update_lead_btn{
+  background-color: black !important; 
+  border-color: black !important;
+}
+.modal_head{
+  background-color: black;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.delete_lead_btn{
+  margin-right: 1em;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.delete_ead_form {
+  text-align: center;
 }
