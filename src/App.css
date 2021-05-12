@@ -4,7 +4,9 @@
   margin-bottom: 1em;
 }
 .leads_table {
-  
+  border:1px solid grey;
+}
+.leads_table_header{
   background-color: black;
   color:white;
   border-color: gray;
@@ -36,4 +38,12 @@
 }
 .delete_ead_form {
   text-align: center;
+}
+
+.update_lead_form{
+
+}
+
+.delete_lead_form{
+  
 }

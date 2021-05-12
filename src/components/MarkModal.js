@@ -31,7 +31,7 @@ const MarkModal = ({ show, setShow, getAllData, data }) => {
       <Modal.Header className="modal_head">
         <Modal.Title>Mark Communication</Modal.Title>
       </Modal.Header>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="update_lead_form">
         <Modal.Body>
           <Form.Label>Communication</Form.Label>
           <Form.Control

@@ -47,8 +47,8 @@ function App() {
           >
             Add Lead
           </Button>
-          <Table>
-            <thead className="leads_table">
+          <Table className="leads_table">
+            <thead className="leads_table_header">
               <th>Name</th>
               <th>Email</th>
               <th>Mobile Num</th>

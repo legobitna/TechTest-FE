@@ -24,7 +24,7 @@ const MarkModal = ({ show, setShow, getAllData, data }) => {
         <Modal.Title>Do you wish to delete this lead?</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body className="delete_ead_form">
+      <Modal.Body className="delete_lead_form ">
         <Button
           variant="danger"
           type="submit"
