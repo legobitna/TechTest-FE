@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import api from "../api";
-import { toast } from "react-toastify";
-const MarkModal = ({ show, setShow, getAllData, data }) => {
+import { useDispatch } from "react-redux";
+import { leadAction } from "../redux/actions/leadAction";
+const MarkModal = ({ show, setShow, data }) => {
+  let dispatch = useDispatch();
   const [communication, setCommunication] = useState("");
   const handleClose = () => setShow(false);
   const handleChange = (e) => {
@@ -10,16 +11,8 @@ const MarkModal = ({ show, setShow, getAllData, data }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await api.put(`/mark_lead/${data.id}`, { communication });
-      if (!res.status === 202) {
-        throw new Error("fetch Error");
-      }
-      getAllData();
-      handleClose();
-    } catch (err) {
-      toast.error(err.message);
-    }
+    dispatch(leadAction.addCommunicationData(data.id, communication));
+    handleClose();
   };
   useEffect(() => {
     if (data) {

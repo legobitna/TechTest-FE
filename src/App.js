@@ -1,35 +1,24 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Table, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import api from "./api";
-import { toast } from "react-toastify";
+
 import ClipLoader from "react-spinners/ClipLoader";
 import AddModal from "./components/AddModal";
 import MarkModal from "./components/MarkModal";
 import DeleteModal from "./components/DeleteModal";
+import { leadAction } from "./redux/actions/leadAction";
+import { useSelector, useDispatch } from "react-redux";
 function App() {
-  const [leadList, setLeadList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  let dispatch = useDispatch();
+  const leadList = useSelector((state) => state.leadList);
+  const loading = useSelector((state) => state.loading);
   const [addShow, setAddShow] = useState(false);
   const [markShow, setMarkShow] = useState(false);
   const [deleteShow, setDeleteShow] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
   const getAllData = async () => {
-    try {
-      setLoading(true);
-      const res = await api.get("/leads?location_string=India");
-      if (res.status === 200) {
-        setLoading(false);
-        setLeadList(res.data);
-      } else {
-        throw new Error("fetch error");
-      }
-    } catch (err) {
-      setLoading(false);
-      toast.error(err.message);
-    }
+    dispatch(leadAction.getAllData());
   };
   useEffect(() => {
     getAllData();
@@ -71,7 +60,7 @@ function App() {
                           className="update_lead_modal_btn"
                           onClick={() => {
                             setSelectedData({
-                              id: data.id,
+                              id: data._id,
                               communication: data.communication,
                             });
 
@@ -83,7 +72,7 @@ function App() {
                         <Button
                           className="delete_lead_modal_btn"
                           onClick={() => {
-                            setSelectedData({ id: data.id });
+                            setSelectedData({ id: data._id });
                             setDeleteShow(true);
                           }}
                         >
@@ -95,21 +84,15 @@ function App() {
                 })}
             </tbody>
           </Table>
-          <AddModal
-            show={addShow}
-            setShow={setAddShow}
-            getAllData={getAllData}
-          />
+          <AddModal show={addShow} setShow={setAddShow} />
           <MarkModal
             show={markShow}
             setShow={setMarkShow}
-            getAllData={getAllData}
             data={selectedData}
           />
           <DeleteModal
             show={deleteShow}
             setShow={setDeleteShow}
-            getAllData={getAllData}
             data={selectedData}
           />
         </>

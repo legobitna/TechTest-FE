@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form, Row, Col, Modal } from "react-bootstrap";
-import api from "../api";
-import { toast } from "react-toastify";
-const AddModal = ({ show, setShow, getAllData }) => {
+import { useDispatch } from "react-redux";
+import { leadAction } from "../redux/actions/leadAction";
+const AddModal = ({ show, setShow }) => {
+  let dispatch = useDispatch();
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -11,24 +12,16 @@ const AddModal = ({ show, setShow, getAllData }) => {
     location_type: "City",
     location_string: "",
   });
-  const [validated, setValidated] = useState(false);
   const handleClose = () => setShow(false);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await api.post("/leads/", formData);
-      if (res.status === 200) {
-        throw new Error("fetch error");
-      }
-      getAllData();
-      handleClose();
-    } catch (err) {
-      toast.error(err.message);
-    }
+    dispatch(leadAction.addLeadData(formData));
+
+    handleClose();
   };
   return (
     <Modal show={show} onHide={handleClose}>

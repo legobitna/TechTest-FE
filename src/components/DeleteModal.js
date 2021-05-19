@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import api from "../api";
-import { toast } from "react-toastify";
-const MarkModal = ({ show, setShow, getAllData, data }) => {
+import { useDispatch } from "react-redux";
+import { leadAction } from "../redux/actions/leadAction";
+const MarkModal = ({ show, setShow, data }) => {
   const handleClose = () => setShow(false);
-
+  let dispatch = useDispatch();
   const handleDelete = async () => {
-    try {
-      const res = await api.delete(`/leads/${data.id}`);
-      if (!res.status === 200) {
-        throw new Error("fetch Error");
-      }
-      getAllData();
-      handleClose();
-    } catch (err) {
-      toast.error(err.message);
-    }
+    dispatch(leadAction.deleteData(data.id));
+    handleClose();
   };
 
   return (
